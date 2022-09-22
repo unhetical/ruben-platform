@@ -1,0 +1,27 @@
+<div class="ui-search px-3 row d-flex flex-wrap justify-content-between">
+  <div class="col-3" style="min-width: 200px">
+    <span class="p-input-icon-left" >
+      <i class="pi pi-search"></i>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="query"
+        (ngModelChange)="setFilters()"
+        placeholder="Search ..."
+      />
+    </span>
+  </div>
+
+  <div class="col-3" style="min-width: 200px">
+    <p-dropdown
+      [options]="regionOptions"
+      [(ngModel)]="selectedRegion"
+      (onChange)="setFilters()"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Filter by region"
+      [showClear]="true"
+    ></p-dropdown>
+  </div>
+
+</div>

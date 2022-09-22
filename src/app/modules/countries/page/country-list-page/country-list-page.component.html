@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center justify-content-center p-5">
+  <div *ngIf="!(loading$ | async); else loadingTemplate">
+    <app-ui-search></app-ui-search>
+    <app-ui-block-item></app-ui-block-item>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <p-progressSpinner></p-progressSpinner>
+  </ng-template>
+</div>

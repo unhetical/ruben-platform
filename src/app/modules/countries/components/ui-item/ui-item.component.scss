@@ -1,0 +1,46 @@
+// Use scss + (B__E--M)
+.ui-item {
+  cursor: pointer;
+  // background-color: var(--color-1);
+  border-radius: var(--border-radius);
+  width: 275px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 0.2rem;
+
+  &:hover {
+    transition: all ease 150ms;
+    opacity: 0.6;
+  }
+
+  .image {
+    border-radius: var(--border-radius);
+    height: 180px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .block-text {
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    &__visited-icon {
+      min-height: 8px;
+    }
+  }
+
+  .info {
+    &__section {
+      display: flex;
+      font-size: var(--font-size-3);
+      justify-content: space-between;
+      font-weight: 500;
+      align-content: center;
+      align-items: center;
+      gap: 0.35rem;
+    }
+  }
+}

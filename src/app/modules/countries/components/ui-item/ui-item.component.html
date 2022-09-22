@@ -1,0 +1,32 @@
+<div class="ui-item">
+  <div
+    class="image"
+    [style.backgroundImage]="'url(' + item?.flags.png + ')'"
+  ></div>
+
+  <div class="block-text p-4">
+    <h4 class="py-2">{{ item?.name.common }}</h4>
+
+    <div class="block-text__info info">
+      <!-- Population -->
+      <div class="info__section">
+        <b>Population</b>
+        <span>{{ item?.area }}</span>
+      </div>
+      <!-- Region -->
+      <div class="info__section">
+        <b>Region</b>
+        <span>{{ item?.region }}</span>
+      </div>
+      <!-- Capital -->
+      <div class="info__section">
+        <b>Capital</b>
+        <span>{{ item?.capital }}</span>
+      </div>
+    </div>
+    <!-- if already visited -->
+    <div class="block-text__visited-icon d-flex align-items-end justify-content-end">
+      <i *ngIf="false" class="uil uil-eye"></i>
+    </div>
+  </div>
+</div>

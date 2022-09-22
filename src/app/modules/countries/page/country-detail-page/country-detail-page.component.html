@@ -1,0 +1,63 @@
+<div class="country-detail-view p-5">
+  <p-button
+    label="Back"
+    icon="pi pi-arrow-left"
+    [routerLink]="['/countries']"
+  ></p-button>
+
+  <div *ngIf="country" class="d-flex flex-wrap py-5 row">
+    <div class="image col">
+      <img [src]="country.flags.png" class="img-fluid" alt="flag" />
+    </div>
+
+    <div class="block-text w-100 p-4 col">
+      <h3 class="py-2" style="font-weight: 500">{{ country.name.common }}</h3>
+
+      <div class="block-text__info w-100 info row">
+        <div class="col">
+          <!-- Population -->
+          <div class="info__section">
+            <b>Population</b>
+            <span>{{ country.area }}</span>
+          </div>
+          <!-- Region -->
+          <div class="info__section">
+            <b>Region</b>
+            <span>{{ country.region }}</span>
+          </div>
+          <!-- Capital -->
+          <div class="info__section">
+            <b>Capital</b>
+            <span>{{ country.capital }}</span>
+          </div>
+        </div>
+
+        <div class="col">
+          <!-- Top level domain -->
+          <div class="info__section">
+            <b>Top level domain</b>
+            <span>{{ country.tld }}</span>
+          </div>
+          <!-- Currencies -->
+          <div class="info__section">
+            <b>Currencies</b>
+            <span
+              *ngFor="let item of country.currencies | keyvalue; last as isLast"
+              >{{ item.key }}
+              <ng-container *ngIf="!isLast">, </ng-container>
+            </span>
+          </div>
+          <!-- Languages -->
+          <div class="info__section">
+            <b>Languages</b>
+            <span
+              *ngFor="let item of country.languages | keyvalue; last as isLast"
+              >{{ item.value }}
+              <ng-container *ngIf="!isLast">, </ng-container>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="header">
+  <div class="header__section">
+    <ul class="header__list">
+      <li [routerLink]="['/home']" class="header__logo">Rubén C. Test</li>
+    </ul>
+  </div>
+  <div class="header__section">
+    <ul class="header__list">
+      <li [routerLink]="['/countries']" class="header__logo">Countries</li>
+
+      <li [routerLink]="['/marvel/characters']" class="header__logo">Marvel characters</li>
+
+      <li (click)="switchTheme()">
+        <i
+          class="pi align-middle"
+          [ngClass]="!isDark ? 'pi-moon' : 'pi-circle-off'"
+        ></i>
+        {{ isDark ? "Light mode" : "Dark mode" }}
+      </li>
+    </ul>
+  </div>
+</div>

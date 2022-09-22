@@ -1,0 +1,28 @@
+.country-detail-view{
+  height: calc(100vh - 50px);
+  .image {
+  min-width: 320px;
+  min-height: 180px;
+
+  & .img-fluid{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+}
+
+.block-text {
+  width: 100%;
+  &__info {
+    gap: 0.35rem;
+  }
+}
+
+.info {
+  &__section {
+    b {
+      padding-right: 0.9em;
+    }
+    font-size: var(--font-size-3);
+    font-weight: 500;
+  }
+}
+}

@@ -1,0 +1,7 @@
+<div class="ui-block-item pt-5" style="height: 100%">
+  <app-ui-item
+    [item]="country"
+    *ngFor="let country of countries$ | async"
+    (click)="goToCountryDetail(country)"
+  ></app-ui-item>
+</div>
