@@ -1,10 +1,7 @@
+import { CharacterDataWrapper } from './../../../core/models/character/character.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  CharacterModel,
-  Data,
-  RootObject,
-} from '@core/models/character/character.interface';
+import { CharacterModel } from '@core/models/character/character.interface';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -24,7 +21,7 @@ export class CharacterService {
 
   getCharacters(): Observable<CharacterModel[]> {
     return this.http
-      .get<RootObject>(
+      .get<CharacterDataWrapper>(
         this.GATEWAY +
           this.API +
           this.CHARACTERS +
@@ -32,7 +29,6 @@ export class CharacterService {
       )
       .pipe(
         map(({ data }) => {
-          console.log(data);
           return data.results;
         }),
         catchError((err) => throwError(err))

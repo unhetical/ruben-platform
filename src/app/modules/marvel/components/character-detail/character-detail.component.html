@@ -1,1 +1,38 @@
-<p>character-detail works!</p>
+<div *ngIf="character">
+  <div *ngIf="character.thumbnail" class="py-2">
+    <img
+      class="img-thumbnail"
+      src="{{ character.thumbnail.path }}.{{
+        character.thumbnail.extension
+      }}"
+      alt="avatar"
+      width="200px"
+    />
+  </div>
+
+  <div class="py-2">
+    <b class="pe-2"> Name </b>
+    <span>
+      {{ character.name }}
+    </span>
+  </div>
+
+  <div class="py-2">
+    <b class="pe-2">Description</b>
+    <span>{{ character.description }}</span>
+  </div>
+
+  <div class="py-2">
+    <b class="pe-2">Modified</b>
+    <span>{{ character.modified | date: "dd/mm/YYYY" }}</span>
+  </div>
+
+  <div *ngIf="character.comics.items" class="py-2">
+    <b class="pe-2">Appears in</b>
+    <ul class="list-group pt-2" style="max-height: 180px; overflow: auto">
+      <li *ngFor="let item of character.comics.items" class="list-group-item">
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+</div>

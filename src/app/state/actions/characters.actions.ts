@@ -10,8 +10,8 @@ export const loadedCharacters = createAction(
   props<{ characters: CharacterModel[] }>()
 );
 
-export const addCharacter = createAction(
-  '[Marvel Character List] Add Character',
+export const saveCharacter = createAction(
+  '[Marvel Character List] Save Character',
   props<{ character: CharacterModel }>()
 );
 

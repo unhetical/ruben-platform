@@ -1,90 +1,88 @@
+export interface CharacterDataWrapper {
+  data: CharacterDataContainer;
+  code?: number;
+  status?: string;
+  copyright?: string;
+  attributionText?: string;
+  attributionHTML?: string;
+  etag?: string;
+}
+export interface CharacterDataContainer {
+  results: CharacterModel[];
+  offset?: number;
+  limit?: number;
+  total?: number;
+  count?: number;
+}
 export interface CharacterModel {
   id: number;
-  name: string;
-  description: string;
-  modified: string;
-  resourceURI: string;
-  urls: Url[];
-  thumbnail: Thumbnail;
-  comics: Comics;
-  stories: Stories;
-  events: Events;
-  series: Series;
-}
-
-// Meta data
-export interface Data {
-  offset: string;
-  limit: string;
-  total: string;
-  count: string;
-  results: CharacterModel[];
+  name?: string;
+  description?: string;
+  modified?: Date;
+  resourceURI?: string;
+  urls?: Url[];
+  thumbnail?: Image;
+  comics?: ComicList;
+  stories?: StoryList;
+  events?: EventList;
+  series?: SeriesList;
 }
 
 export interface Url {
-  type: string;
-  url: string;
+  type?: string;
+  url?: string;
 }
 
-export interface Thumbnail {
-  path: string;
-  extension: string;
+export interface Image {
+  path?: string;
+  extension?: string;
 }
 
-export interface Item {
-  resourceURI: string;
-  name: string;
+export interface ComicList {
+  available?: number;
+  returned?: number;
+  collectionURI?: string;
+  items?: ComicSummary[];
 }
 
-export interface Comics {
-  available: string;
-  returned: string;
-  collectionURI: string;
-  items: Item[];
+export interface ComicSummary {
+  resourceURI?: string;
+  name?: string;
 }
 
-export interface Item2 {
-  resourceURI: string;
-  name: string;
-  type: string;
+export interface StoryList {
+  available?: number;
+  returned?: number;
+  collectionURI?: string;
+  items?: StorySummary[];
 }
 
-export interface Stories {
-  available: string;
-  returned: string;
-  collectionURI: string;
-  items: Item2[];
+export interface StorySummary {
+  resourceURI?: string;
+  name?: string;
+  type?: string;
 }
 
-export interface Item3 {
-  resourceURI: string;
-  name: string;
+export interface EventList {
+  available?: number;
+  returned?: number;
+  collectionURI?: string;
+  items?: EventSummary[];
 }
 
-export interface Events {
-  available: string;
-  returned: string;
-  collectionURI: string;
-  items: Item3[];
+export interface EventSummary {
+  resourceURI?: string;
+  name?: string;
 }
 
-export interface Item4 {
-  resourceURI: string;
-  name: string;
+export interface SeriesList {
+  available?: number;
+  returned?: number;
+  collectionURI?: string;
+  items?: SeriesSummary[];
 }
 
-export interface Series {
-  available: string;
-  returned: string;
-  collectionURI: string;
-  items: Item4[];
-}
-export interface RootObject {
-  code: string;
-  status: string;
-  copyright: string;
-  attributionText: string;
-  attributionHTML: string;
-  data: Data;
-  etag: string;
+export interface SeriesSummary {
+  resourceURI?: string;
+  name?: string;
 }

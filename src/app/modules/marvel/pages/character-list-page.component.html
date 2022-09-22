@@ -1,3 +1,5 @@
+<!-- Messages -->
+<p-toast></p-toast>
 <p-confirmPopup></p-confirmPopup>
 
 <div class="p-5">
@@ -47,7 +49,7 @@
             type="button"
             icon="pi pi-file-excel"
             class="p-button-rounded p-button-text p-button-success mx-4 font-xl"
-            pTooltip="Exportar a Excel"
+            pTooltip="Export to Excel"
             tooltipPosition="bottom"
             (click)="characterTable.exportCSV()"
           ></button>
@@ -75,6 +77,20 @@
         </td>
 
         <td class="d-flex justify-content-end">
+          <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-eye"
+          class="p-button-rounded p-button-text mx-2"
+          pTooltip="View Character"
+          tooltipPosition="bottom"
+          (click)="
+            viewCharacter(character);
+            $event.stopImmediatePropagation();
+            $event.preventDefault()
+          "
+        ></button>
           <button
             pButton
             pRipple

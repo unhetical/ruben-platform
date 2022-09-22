@@ -1,7 +1,7 @@
 import { CharacterState } from '@core/models/character/character.state';
 import { Action, createReducer, on } from '@ngrx/store';
 import {
-  addCharacter,
+  saveCharacter,
   deleteCharacter,
   loadCharacters,
   loadedCharacters,
@@ -23,7 +23,9 @@ export const charactersReducer = createReducer(
     return { ...state, loading: false, characters };
   }),
 
-  on(addCharacter, (state, { character }) => {
+  on(saveCharacter, (state, { character }) => {
+    let newState = {...state};
+    newState.characters = newState.characters.filter((ch) => ch.id !== character.id);
     return { ...state, character };
   }),
 

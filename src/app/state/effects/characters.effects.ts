@@ -22,7 +22,7 @@ export class CharactersEffects {
   );
 
   // TODO: call the api to add the new character
-  // addCharacter$ = createEffect(() =>
+  // saveCharacter$ = createEffect(() =>
   //   this.actions$.pipe()
   // );
 
