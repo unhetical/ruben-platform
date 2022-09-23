@@ -10,7 +10,6 @@ import { ROOT_REDUCERS } from './state/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { CountriesEffects } from './state/effects/countries.effects';
 import { CharactersEffects } from './state/effects/characters.effects';
-import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { SharedModule } from '@shared/shared.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
     SharedModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ name: 'TEST' }),

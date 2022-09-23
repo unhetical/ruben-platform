@@ -13,6 +13,9 @@ export class CharacterService {
   private GATEWAY = environment.gateway_marvel;
   private API = environment.api_marvel;
   private CHARACTERS = '/characters';
+  private PUBLIC_KEY = environment.public_key_marvel;
+  private HASH = environment.hash_marvel;
+  private TS = environment.ts_marvel;
 
   selectedCharacter$ = new Subject<CharacterModel>();
   selectedCharacter!: CharacterModel;
@@ -25,7 +28,7 @@ export class CharacterService {
         this.GATEWAY +
           this.API +
           this.CHARACTERS +
-          '?ts=1000&apikey=996218503ccf0f1e9f4e3aeccfafe930&hash=3a08067921232e2d6d156d8e3376bb0b'
+          `?ts=${this.TS}&apikey=${this.PUBLIC_KEY}&hash=${this.HASH}`
       )
       .pipe(
         map(({ data }) => {

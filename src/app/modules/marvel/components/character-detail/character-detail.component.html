@@ -1,33 +1,25 @@
-<div *ngIf="character">
+<div *ngIf="character && mode === 'view'; else editTemplate">
+  <!-- Thumbnail -->
   <div *ngIf="character.thumbnail" class="py-2">
     <img
       class="img-thumbnail"
-      src="{{ character.thumbnail.path }}.{{
-        character.thumbnail.extension
-      }}"
+      src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
       alt="avatar"
       width="200px"
     />
   </div>
-
-  <div class="py-2">
-    <b class="pe-2"> Name </b>
-    <span>
-      {{ character.name }}
-    </span>
-  </div>
-
+  <!-- Description -->
   <div class="py-2">
     <b class="pe-2">Description</b>
     <span>{{ character.description }}</span>
   </div>
-
+  <!-- Modified -->
   <div class="py-2">
     <b class="pe-2">Modified</b>
-    <span>{{ character.modified | date: "dd/mm/YYYY" }}</span>
+    <span>{{ character.modified | date: "dd/MM/YYYY" }}</span>
   </div>
-
-  <div *ngIf="character.comics.items" class="py-2">
+  <!-- Comics -->
+  <div *ngIf="character.comics && character.comics.items" class="py-2">
     <b class="pe-2">Appears in</b>
     <ul class="list-group pt-2" style="max-height: 180px; overflow: auto">
       <li *ngFor="let item of character.comics.items" class="list-group-item">
@@ -36,3 +28,74 @@
     </ul>
   </div>
 </div>
+
+<!-- Add or Edit template -->
+<ng-template #editTemplate>
+  <!-- Thumbnail -->
+  <div *ngIf="character.thumbnail?.path && mode === 'edit'" class="py-2">
+    <img
+      class="img-thumbnail"
+      src="{{ character.thumbnail?.path }}.{{ character.thumbnail?.extension }}"
+      alt="avatar"
+      width="200px"
+    />
+  </div>
+  <!-- Form -->
+  <form [formGroup]="form" class="form">
+    <div class="col-lg-6 col-md-12 mb-4 px-0">
+      <label for="name">Name</label>
+      <input
+        class="form-control"
+        [class.invalid]="
+          form.controls.name.touched && form.controls.name.invalid
+        "
+        [class.valid]="form.controls.name.touched && form.controls.name.valid"
+        formControlName="name"
+        name="name"
+        [placeholder]=""
+      />
+    </div>
+
+    <div class="col-lg-6 col-md-12 mb-4 px-0">
+      <label for="description">description</label>
+      <textarea
+        pInputTextarea
+        [rows]="5"
+        [cols]="30"
+        [autoResize]="true"
+        class="form-control"
+        [class.invalid]="
+          form.controls.description.touched && form.controls.description.invalid
+        "
+        [class.valid]="
+          form.controls.description.touched && form.controls.description.valid
+        "
+        formControlName="description"
+        name="description"
+      ></textarea>
+    </div>
+
+    <div class="col-lg-6 col-md-12 mb-4 px-0">
+      <label for="avatar">Avatar</label>
+      <p-fileUpload
+        url="./upload.test"
+        [auto]="true"
+        chooseLabel="Select image"
+      ></p-fileUpload>
+    </div>
+  </form>
+
+  <div class="float-end py-3">
+    <button type="button" class="btn btn-secondary mx-4" (click)="ref.close()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="form.invalid"
+      (click)="saveCharacter()"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>

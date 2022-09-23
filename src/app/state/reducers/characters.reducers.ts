@@ -1,3 +1,4 @@
+import { CharacterModel } from '@core/models/character/character.interface';
 import { CharacterState } from '@core/models/character/character.state';
 import { Action, createReducer, on } from '@ngrx/store';
 import {
@@ -24,9 +25,13 @@ export const charactersReducer = createReducer(
   }),
 
   on(saveCharacter, (state, { character }) => {
-    let newState = {...state};
-    newState.characters = newState.characters.filter((ch) => ch.id !== character.id);
-    return { ...state, character };
+    const newState: CharacterState = { ...state };
+    const newCharacters: CharacterModel[] = [...newState.characters];
+    const foundIndex = newCharacters.findIndex((x) => x.id == character.id);
+
+    newCharacters.splice(foundIndex, 1, character);
+    newState.characters = [...newCharacters];
+    return newState;
   }),
 
   on(resetCharacters, (state) => {
@@ -37,9 +42,8 @@ export const charactersReducer = createReducer(
   }),
 
   on(deleteCharacter, (state, { id }) => {
-   let newState = {...state};
-   newState.characters = newState.characters.filter((ch) => ch.id !== id);
-   console.log(newState);
+    let newState = { ...state };
+    newState.characters = newState.characters.filter((ch) => ch.id !== id);
     return newState;
   })
 );

@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+// TODO: 1.Create custom theme with light & dark mode 2.Create mixins for colors & sizes
 
 :root {
   --font-family-1: "Poppins", sans-serif;
@@ -31,17 +31,27 @@ body {
 }
 
 .light-theme {
-  background-color: whitesmoke !important;
+  background-color: whitesmoke;
 }
 
 .dark-theme {
-  background-color: var(--bs-dark) !important;
+  background-color: var(--bs-dark);
   color: white;
   .header {
-    background-color: var(--bs-gray-800) !important;
-    border-bottom: solid 1px var(--bs-dark) !important;
+    background-color: var(--bs-gray-800);
+    border-bottom: solid 1px var(--bs-dark);
   }
   .p-button {
-    background: var(--bs-gray-800) !important;
+    background: var(--bs-gray-800);
+  }
+
+  .p-dialog .p-dialog-content {
+    background-color: var(--bs-gray-800);
+    color: white;
+  }
+
+  .p-dialog .p-dialog-header {
+    background-color: var(--bs-gray-800);
+    color: white;
   }
 }

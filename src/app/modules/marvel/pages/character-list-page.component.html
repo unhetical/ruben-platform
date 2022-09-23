@@ -41,7 +41,7 @@
             label="Add character"
             class="p-button-text p-button-rounded mx-2"
             style="font-weight: 600"
-            (click)="addCharacter()"
+            (click)="openDetailModal('add')"
           ></button>
           <button
             pButton
@@ -78,19 +78,19 @@
 
         <td class="d-flex justify-content-end">
           <button
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-eye"
-          class="p-button-rounded p-button-text mx-2"
-          pTooltip="View Character"
-          tooltipPosition="bottom"
-          (click)="
-            viewCharacter(character);
-            $event.stopImmediatePropagation();
-            $event.preventDefault()
-          "
-        ></button>
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-eye"
+            class="p-button-rounded p-button-text mx-2"
+            pTooltip="View Character"
+            tooltipPosition="bottom"
+            (click)="
+              openDetailModal('view', character);
+              $event.stopImmediatePropagation();
+              $event.preventDefault()
+            "
+          ></button>
           <button
             pButton
             pRipple
@@ -100,25 +100,25 @@
             pTooltip="Edit Character"
             tooltipPosition="bottom"
             (click)="
-              editCharacter(character);
+              openDetailModal('edit', character);
               $event.stopImmediatePropagation();
               $event.preventDefault()
             "
           ></button>
           <button
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-trash"
-          class="p-button-rounded p-button-text mx-2 text-danger"
-          pTooltip="Remove Character"
-          tooltipPosition="bottom"
-          (click)="
-            removeCharacter($event, character);
-            $event.stopImmediatePropagation();
-            $event.preventDefault()
-          "
-        ></button>
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-text mx-2 text-danger"
+            pTooltip="Remove Character"
+            tooltipPosition="bottom"
+            (click)="
+              removeCharacter($event, character);
+              $event.stopImmediatePropagation();
+              $event.preventDefault()
+            "
+          ></button>
         </td>
       </tr>
     </ng-template>

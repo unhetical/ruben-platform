@@ -6,12 +6,12 @@ import { UiSearchComponent } from './components/ui-search/ui-search.component';
 import { CountryListPageComponent } from './page/country-list-page/country-list-page.component';
 import { UiItemComponent } from './components/ui-item/ui-item.component';
 import { UiBlockItemComponent } from './components/ui-block-item/ui-block-item.component';
-import { FormsModule } from '@angular/forms';
 import { CountryDetailPageComponent } from './page/country-detail-page/country-detail-page.component';
 import { ButtonModule } from 'primeng-lts/button';
 import { InputTextModule } from 'primeng-lts/inputtext';
 import { DropdownModule } from 'primeng-lts/dropdown';
-import {ProgressSpinnerModule} from 'primeng-lts/progressspinner';
+import { ProgressSpinnerModule } from 'primeng-lts/progressspinner';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,11 +24,11 @@ import {ProgressSpinnerModule} from 'primeng-lts/progressspinner';
   imports: [
     CommonModule,
     CountriesRoutingModule,
-    FormsModule,
+    SharedModule,
     ButtonModule,
     InputTextModule,
     DropdownModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
   ],
 })
 export class CountriesModule {}

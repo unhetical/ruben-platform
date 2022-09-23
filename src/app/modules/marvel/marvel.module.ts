@@ -1,10 +1,10 @@
-import { CharacterListPageComponent } from './pages/character-list-page.component';
+// Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MarvelRoutingModule } from './marvel-routing.module';
 import { SharedModule } from '@shared/shared.module';
 // Components
+import { CharacterListPageComponent } from './pages/character-list-page.component';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 // Prime
 import { TableModule } from 'primeng-lts/table';
@@ -21,6 +21,8 @@ import { MessagesModule } from 'primeng-lts/messages';
 import { ToastModule } from 'primeng-lts/toast';
 import { ScrollPanelModule } from 'primeng-lts/scrollpanel';
 import { TooltipModule } from 'primeng-lts/tooltip';
+import { FileUploadModule } from 'primeng-lts/fileupload';
+import {InputTextareaModule} from 'primeng-lts/inputtextarea';
 
 @NgModule({
   declarations: [CharacterListPageComponent, CharacterDetailComponent],
@@ -37,6 +39,8 @@ import { TooltipModule } from 'primeng-lts/tooltip';
     ToastModule,
     ScrollPanelModule,
     TooltipModule,
+    FileUploadModule,
+    InputTextareaModule
   ],
   providers: [
     DialogService,
