@@ -73,7 +73,20 @@
     <ng-template pTemplate="body" let-character>
       <tr [pSelectableRow]="character">
         <td *ngFor="let col of cols" class="text-center">
-          {{ character[col.field] }}
+          <span *ngIf="col.field !== 'thumbnail'" else elseTemplate>
+            {{ character[col.field] }}
+          </span>
+
+          <div *ngIf="col.field === 'avatar'" class="py-2">
+            <img
+              class="img-thumbnail"
+              src="{{ character.thumbnail.path }}.{{
+                character.thumbnail.extension
+              }}"
+              [alt]="character.name"
+              width="100px"
+            />
+          </div>
         </td>
 
         <td class="d-flex justify-content-end">

@@ -33,6 +33,7 @@ export class CharacterListPageComponent implements OnInit {
 
   cols = [
     { field: 'id', header: 'id' },
+    { field: 'avatar', header: 'Avatar' },
     { field: 'name', header: 'Name' },
     { field: 'description', header: 'Description' },
   ];
@@ -85,7 +86,10 @@ export class CharacterListPageComponent implements OnInit {
           id: 0,
           name: '',
           description: '',
-          thumbnail: { extension: '', path: '' },
+          thumbnail: {
+            extension: 'jpg',
+            path: 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available',
+          },
         };
 
         config.header = 'New Character';
