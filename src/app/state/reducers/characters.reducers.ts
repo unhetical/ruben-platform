@@ -29,7 +29,15 @@ export const charactersReducer = createReducer(
     const newCharacters: CharacterModel[] = [...newState.characters];
     const foundIndex = newCharacters.findIndex((x) => x.id == character.id);
 
-    newCharacters.splice(foundIndex, 1, character);
+    if (foundIndex !== -1) {
+      // edit
+      newCharacters.splice(foundIndex, 1, character);
+    } else {
+      // add new
+      let newCharacter = { ...character };
+      newCharacter.id = Math.floor(100000 + Math.random() * 900000);
+      newCharacters.push(newCharacter);
+    }
     newState.characters = [...newCharacters];
     return newState;
   }),
