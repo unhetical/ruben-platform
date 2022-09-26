@@ -1,4 +1,3 @@
-import { selectData } from './../../../../state/selectors/countries.selectors';
 import { selectLoading } from '../../../../state/selectors/countries.selectors';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';

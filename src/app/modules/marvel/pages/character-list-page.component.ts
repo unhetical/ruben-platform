@@ -2,7 +2,11 @@ import { ConfirmationService, MessageService } from 'primeng-lts/api';
 import { Component, OnInit } from '@angular/core';
 import { CharacterModel } from '@core/models/character/character.interface';
 import { Store } from '@ngrx/store';
-import { DialogService, DynamicDialogRef } from 'primeng-lts/dynamicdialog';
+import {
+  DialogService,
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from 'primeng-lts/dynamicdialog';
 import { Observable } from 'rxjs';
 import {
   deleteCharacter,
@@ -57,42 +61,36 @@ export class CharacterListPageComponent implements OnInit {
     });
   }
 
-  openDetailModal(mode: string, data?: CharacterModel) {
+  openDetailModal(mode: string, character?: CharacterModel) {
     let ref: DynamicDialogRef;
+    const config: DynamicDialogConfig = {
+      header: character?.name,
+      width: '60%',
+      contentStyle: { 'max-height': '600px', overflow: 'auto' },
+      dismissableMask: true,
+      data: { character, mode },
+    };
+
     switch (mode) {
       case 'view':
-        ref = this.dialogService.open(CharacterDetailComponent, {
-          header: data?.name,
-          width: '60%',
-          contentStyle: { 'max-height': '600px', overflow: 'auto' },
-          dismissableMask: true,
-          data: { character: data, mode: 'view' },
-        });
+        ref = this.dialogService.open(CharacterDetailComponent, config);
         break;
       case 'edit':
-        ref = this.dialogService.open(CharacterDetailComponent, {
-          header: 'Edit Character',
-          width: '60%',
-          contentStyle: { 'max-height': '600px', overflow: 'auto' },
-          dismissableMask: true,
-          data: { character: data, mode: 'edit' },
-        });
+        config.header = 'Edit Character';
+        config.data = { character, mode };
+        ref = this.dialogService.open(CharacterDetailComponent, config);
         break;
       case 'add':
-        const character = {
+        const newCharacter = {
           id: 0,
           name: '',
           description: '',
           thumbnail: { extension: '', path: '' },
         };
 
-        ref = this.dialogService.open(CharacterDetailComponent, {
-          header: 'New Character',
-          width: '60%',
-          contentStyle: { 'max-height': '600px', overflow: 'auto' },
-          dismissableMask: true,
-          data: { character, mode: 'add' },
-        });
+        config.header = 'New Character';
+        config.data = { character: newCharacter, mode };
+        ref = this.dialogService.open(CharacterDetailComponent, config);
         break;
 
       default:

@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
     const body = document.getElementsByTagName('body')[0];
     if (this.isDark && !body.classList.contains('dark-theme')) {
       body.classList.add('dark-theme');
+      body.classList.remove('light-theme');
     }
   }
 
@@ -30,9 +31,11 @@ export class HeaderComponent implements OnInit {
 
     if (this.isDark && body.classList.contains('dark-theme')) {
       body.classList.remove('dark-theme');
+      body.classList.add('light-theme');
       localStorage.removeItem('isDark');
       this.isDark = false;
     } else {
+      body.classList.remove('light-theme');
       body.classList.add('dark-theme');
       localStorage.setItem('isDark', 'dark-theme');
       this.isDark = true;

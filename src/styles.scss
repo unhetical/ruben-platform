@@ -32,6 +32,10 @@ body {
 
 .light-theme {
   background-color: whitesmoke;
+  .header {
+    background-color: whitesmoke;
+    border-bottom: solid 1px var(--bs-gray-500);
+  }
 }
 
 .dark-theme {
