@@ -79,12 +79,14 @@
 
           <div *ngIf="col.field === 'avatar'" class="py-2">
             <img
-              class="img-thumbnail"
+              class="img-fluid img-thumbnail"
               src="{{ character.thumbnail.path }}.{{
                 character.thumbnail.extension
               }}"
               [alt]="character.name"
-              width="100px"
+              width="100"
+              height="56"
+              loading="lazy"
             />
           </div>
         </td>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CharacterModel } from '@core/models/character/character.interface';
 import { Observable, Subject, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -34,6 +34,7 @@ export class CharacterService {
         map(({ data }) => {
           return data.results;
         }),
+        shareReplay(1),
         catchError((err) => throwError(err))
       );
   }

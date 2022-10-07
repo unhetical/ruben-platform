@@ -1,5 +1,4 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +7,8 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 })
 export class HeaderComponent implements OnInit {
   isDark!: boolean;
-  @HostBinding('class') componentCssClass: any;
 
-  constructor(public overlayContainer: OverlayContainer) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.getDefaultTheme();

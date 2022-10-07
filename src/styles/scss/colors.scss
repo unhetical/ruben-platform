@@ -1,0 +1,25 @@
+/* ===== COLORS ===== */
+
+// example
+$orange: #f26c48;
+$orange-light: #ed993f;
+$orange-dark: #e7552c;
+
+
+$colors: (
+  "orange": $orange,
+  "orange-light": $orange-light,
+  "orange-dark": $orange-dark,
+);
+
+@each $name, $color in $colors {
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+}
+
+@each $name, $color in $colors {
+  .color-#{$name} {
+    color: $color !important;
+  }
+}

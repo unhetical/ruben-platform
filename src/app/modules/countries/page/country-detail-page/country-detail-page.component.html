@@ -7,7 +7,7 @@
 
   <div *ngIf="country" class="d-flex flex-wrap py-5 row">
     <div class="image col">
-      <img [src]="country.flags.png" class="img-fluid" alt="flag" />
+      <img [src]="country.flags.png" loading="lazy" class="img-fluid" alt="flag" />
     </div>
 
     <div class="block-text w-100 p-4 col">

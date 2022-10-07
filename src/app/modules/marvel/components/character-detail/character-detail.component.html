@@ -2,10 +2,12 @@
   <!-- Thumbnail -->
   <div *ngIf="character.thumbnail" class="py-2">
     <img
-      class="img-thumbnail"
+      class="img-fluid img-thumbnail"
       src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
       alt="avatar"
-      width="200px"
+      width="200"
+      height="113"
+      loading="lazy"
     />
   </div>
   <!-- Description -->
@@ -34,10 +36,11 @@
   <!-- Thumbnail -->
   <div *ngIf="character.thumbnail?.path && mode === 'edit'" class="py-2">
     <img
-      class="img-thumbnail"
+      class="img-fluid img-thumbnail"
       src="{{ character.thumbnail?.path }}.{{ character.thumbnail?.extension }}"
       alt="avatar"
-      width="200px"
+      width="200"
+      height="113"
     />
   </div>
   <!-- Form -->

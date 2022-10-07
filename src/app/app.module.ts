@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CountriesEffects } from './state/effects/countries.effects';
 import { CharactersEffects } from './state/effects/characters.effects';
 import { SharedModule } from '@shared/shared.module';
+import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,9 @@ import { SharedModule } from '@shared/shared.module';
     StoreDevtoolsModule.instrument({ name: 'TEST' }),
     EffectsModule.forRoot([CountriesEffects, CharactersEffects]),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
