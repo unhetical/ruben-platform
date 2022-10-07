@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  token$ = new Subject<any>();
+  token!: any;
+
   constructor(private router: Router) {}
 
-  isLogin() {
+  isLogin(): boolean {
     // TODO: Login page & methods to validate jwt token
-    const token = localStorage.getItem('auth_token');
-    return token;
+    this.token = localStorage.getItem('auth_token') ? true : false;
+    this.token$.next(this.token);
+    return this.token;
   }
 
   login() {
@@ -25,12 +30,20 @@ export class AuthService {
     this.goLogin();
   }
 
-  setToken() {
+  getToken(): Observable<any> {
+    return this.token$.asObservable();
+  }
+
+  setToken(token = true): void {
     localStorage.setItem('auth_token', 'XXX');
+    this.token = token;
+    this.token$.next(token);
   }
 
   removeToken() {
     localStorage.removeItem('auth_token');
+    this.token = false;
+    this.token$.next(this.token);
   }
 
   goLogin() {

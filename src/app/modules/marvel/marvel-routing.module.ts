@@ -1,6 +1,7 @@
 import { CharacterListPageComponent } from './pages/character-list-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,11 @@ const routes: Routes = [
     redirectTo: '/characters',
     pathMatch: 'full',
   },
-  { path: 'characters', component: CharacterListPageComponent },
+  {
+    path: 'characters',
+    canActivateChild: [AuthGuard],
+    component: CharacterListPageComponent,
+  },
 ];
 
 @NgModule({
