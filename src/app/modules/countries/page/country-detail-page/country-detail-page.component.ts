@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-country-detail-page',
@@ -12,7 +13,7 @@ export class CountryDetailPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(
+    this.route.queryParams.pipe(take(1)).subscribe(
       (param) => (this.country = JSON.parse(param.country))
     );
   }

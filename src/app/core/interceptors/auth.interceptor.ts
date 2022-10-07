@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    req.headers.set('Cache-Control', 'max-age=3000, must-revalidate');
+    req.headers.set('Cache-Control', 'max-age=31536000, must-revalidate');
     req.headers.set('Authorization', `Bearer ${token}`);
 
     const headers = req.clone({
