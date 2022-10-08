@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { SharedModule } from '@shared/shared.module';
-
 
 @NgModule({
   declarations: [
@@ -13,7 +11,6 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
   ]
 })
 export class HomeModule { }

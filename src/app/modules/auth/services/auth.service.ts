@@ -6,8 +6,8 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  token$ = new Subject<any>();
-  token!: any;
+  token$ = new Subject<boolean>();
+  token!: boolean;
 
   constructor(private router: Router) {}
 
@@ -18,16 +18,16 @@ export class AuthService {
     return this.token;
   }
 
-  login() {
+  login(): void {
     if (!this.isLogin()) {
       this.setToken();
     }
-    this.goHome();
+    this.router.navigateByUrl('/home');
   }
 
-  logout() {
+  logout(): void {
     this.removeToken();
-    this.goLogin();
+    this.router.navigateByUrl('/login');
   }
 
   getToken(): Observable<any> {
@@ -40,17 +40,9 @@ export class AuthService {
     this.token$.next(token);
   }
 
-  removeToken() {
+  removeToken(): void {
     localStorage.removeItem('auth_token');
     this.token = false;
     this.token$.next(this.token);
-  }
-
-  goLogin() {
-    this.router.navigateByUrl('/login');
-  }
-
-  goHome() {
-    this.router.navigateByUrl('/home');
   }
 }

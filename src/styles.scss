@@ -1,6 +1,9 @@
 @import "/src/styles/themes/light-theme.scss";
 @import "/src/styles/themes/dark-theme.scss";
 
+@import "colors";
+@import "sizes";
+
 :root {
   --font-family-1: "Poppins", sans-serif;
   --font-family: "Roboto", "Helvetica Neue", "sans-serif";

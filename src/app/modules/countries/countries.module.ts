@@ -7,11 +7,14 @@ import { CountryListPageComponent } from './page/country-list-page/country-list-
 import { UiItemComponent } from './components/ui-item/ui-item.component';
 import { UiBlockItemComponent } from './components/ui-block-item/ui-block-item.component';
 import { CountryDetailPageComponent } from './page/country-detail-page/country-detail-page.component';
+// Prime
 import { ButtonModule } from 'primeng-lts/button';
 import { InputTextModule } from 'primeng-lts/inputtext';
 import { DropdownModule } from 'primeng-lts/dropdown';
 import { ProgressSpinnerModule } from 'primeng-lts/progressspinner';
-import { SharedModule } from '@shared/shared.module';
+import {VirtualScrollerModule} from 'primeng-lts/virtualscroller';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -23,12 +26,14 @@ import { SharedModule } from '@shared/shared.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     CountriesRoutingModule,
-    SharedModule,
     ButtonModule,
     InputTextModule,
     DropdownModule,
     ProgressSpinnerModule,
+    VirtualScrollerModule
   ],
 })
 export class CountriesModule {}

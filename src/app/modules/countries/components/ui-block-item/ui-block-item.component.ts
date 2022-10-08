@@ -12,7 +12,7 @@ import { selectData } from 'src/app/state/selectors/countries.selectors';
   styleUrls: ['./ui-block-item.component.scss'],
 })
 export class UiBlockItemComponent implements OnInit {
-  countries$: Observable<readonly CountryModel[]> = new Observable();
+  countries$: Observable<CountryModel[]> = new Observable();
 
   constructor(private store: Store<AppState>, private router: Router) {}
 

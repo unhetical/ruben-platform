@@ -1,22 +1,65 @@
-<div class="header">
-  <div class="header__section">
-    <ul class="header__list">
-      <li [routerLink]="['/home']" class="header__logo">Rubén C. Test</li>
-    </ul>
+<p-toolbar styleClass="header">
+  <!-- Left side -->
+  <div
+    class="p-toolbar-group-left d-flex align-items-center justify-content-center"
+  >
+    <h1
+      [routerLink]="['/home']"
+      class="p-toolbar-title mb-0"
+      style="cursor: pointer"
+      pTooltip="Go home"
+      tooltipPosition="bottom"
+    >
+      Ruben's platform
+    </h1>
   </div>
-  <div class="header__section">
-    <ul class="header__list">
-      <li [routerLink]="['/countries']" class="header__logo">Countries</li>
 
-      <li [routerLink]="['/marvel/characters']" class="header__logo">Marvel characters</li>
-
-      <li (click)="switchTheme()">
-        <i
-          class="pi align-middle"
-          [ngClass]="!isDark ? 'pi-moon' : 'pi-circle-off'"
-        ></i>
-        {{ isDark ? "Light mode" : "Dark mode" }}
-      </li>
-    </ul>
+  <!-- Center -->
+  <div class="p-toolbar-group-right">
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-images"
+      class="p-button-rounded p-button-text p-shadow-2 bg-white mx-2"
+      pTooltip="Countries"
+      tooltipPosition="bottom"
+      [routerLink]="['/countries']"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-users"
+      class="p-button-rounded p-button-text p-shadow-2 bg-white mx-2"
+      pTooltip="Marvel characters"
+      tooltipPosition="bottom"
+      [routerLink]="['/marvel/characters']"
+    ></button>
   </div>
-</div>
+
+  <!-- Right side -->
+  <div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi {{ isDark ? 'pi-moon' : 'pi-sun' }}"
+      class="p-button-rounded p-button-text p-shadow-2 bg-white mx-2"
+      ngClass="{{ !isDark ? 'p-button-warning' : 'p-button-secondary' }}"
+      pTooltip="Switch to {{ !isDark ? 'light theme' : 'to dark theme' }}"
+      tooltipPosition="bottom"
+      (click)="switchTheme()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-sign-out"
+      class="p-button-rounded p-button-text p-shadow-2 bg-white mx-2"
+      pTooltip="Logout"
+      tooltipPosition="bottom"
+      (click)="logout()"
+    ></button>
+  </div>
+</p-toolbar>

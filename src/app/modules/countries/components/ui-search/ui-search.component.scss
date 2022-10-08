@@ -1,3 +1,8 @@
-.p-input-icon-left, input {
-  width: 100%;
+.ui-search__field {
+  min-width: 200px;
+
+  .p-input-icon-left,
+  input {
+    width: 100%;
+  }
 }

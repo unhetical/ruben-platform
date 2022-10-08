@@ -1,36 +1,7 @@
-.header {
-    height: 50px;
-    display: flex;
-    padding: 0 3rem;
-    justify-content: space-between;
+// Prime Toolbar
+:host ::ng-deep.p-toolbar {
+  background-color: #00aea4;
+  padding: 0.5rem 2rem;
 }
 
-.header__section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    padding: 0 .5rem;
-}
 
-.header__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1.5rem;
-}
-
-.header__list li {
-    cursor: pointer;
-    font-weight: 500;
-    padding: .35rem .5rem;
-}
-
-.header__list li .uil {
-    font-size: 1.2rem;
-}
-
-.header__list li.header__logo {
-    font-weight: 600;
-}

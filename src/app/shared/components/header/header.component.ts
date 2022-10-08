@@ -1,3 +1,4 @@
+import { AuthService } from '@modules/auth/services/auth.service';
 import { Component, HostBinding, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   isDark!: boolean;
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     this.getDefaultTheme();
@@ -38,5 +39,9 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('isDark', 'dark-theme');
       this.isDark = true;
     }
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }
