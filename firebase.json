@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/ruben-test",
+    "public": "dist/ruben-platform",
     "ignore": [
       "firebase.json",
       "**/.*",

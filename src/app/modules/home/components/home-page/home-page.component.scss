@@ -1,0 +1,25 @@
+.servicio a {
+  text-decoration: none;
+  color: black;
+}
+
+.servicio a:hover {
+  color: var(--secundario);
+}
+
+.iconos {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--primario);
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.iconos i {
+  font-size: 2rem;
+  color: var(--oscuro);
+}
