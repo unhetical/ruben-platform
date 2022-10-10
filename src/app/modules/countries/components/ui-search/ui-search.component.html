@@ -1,5 +1,5 @@
-<div class="ui-search px-3 row d-flex flex-wrap justify-content-between">
-  <div class="col-3 ui-search__field">
+<div class="ui-search d-flex flex-wrap gap-2">
+  <div class="col-3 px-3 ui-search__field">
     <span class="p-input-icon-left" >
       <i class="pi pi-search"></i>
       <input
@@ -12,7 +12,7 @@
     </span>
   </div>
 
-  <div class="col-3 search__field">
+  <div class="px-3 search__field">
     <p-dropdown
       [options]="regionOptions"
       [(ngModel)]="selectedRegion"

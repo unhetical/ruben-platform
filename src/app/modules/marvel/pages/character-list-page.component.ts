@@ -32,10 +32,10 @@ export class CharacterListPageComponent implements OnInit {
   characters!: CharacterModel[];
 
   cols = [
-    { field: 'id', header: 'id' },
-    { field: 'avatar', header: 'Avatar' },
-    { field: 'name', header: 'Name' },
-    { field: 'description', header: 'Description' },
+    { field: 'id', header: 'id', width: '100px' },
+    { field: 'avatar', header: 'Avatar',width: '140px' },
+    { field: 'name', header: 'Name',width: '300px' },
+    { field: 'description', header: 'Description',width: '600px' },
   ];
 
   constructor(
