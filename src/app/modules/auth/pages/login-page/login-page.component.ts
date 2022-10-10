@@ -1,5 +1,6 @@
 import { AuthService } from '@modules/auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -7,11 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
+  form!: FormGroup;
+
   constructor(private auth: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initDefaultForm();
+  }
 
-  login() {
-   this.auth.login();
+  initDefaultForm() {
+    this.form = new FormGroup({
+      username: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+    });
+  }
+
+  onSubmit() {
+    this.form.markAllAsTouched();
+    if (this.form.invalid) {
+      console.error('Error: Review the form');
+      return;
+    }
+    this.auth.login();
   }
 }

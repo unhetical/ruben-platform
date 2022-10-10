@@ -29,7 +29,7 @@ import { Table } from 'primeng-lts/table';
 export class CharacterListPageComponent implements OnInit {
   loading$: Observable<boolean> = new Observable();
   characters$: Observable<CharacterModel[]> = new Observable();
-  characters: CharacterModel[] = [];
+  characters!: CharacterModel[];
 
   cols = [
     { field: 'id', header: 'id' },

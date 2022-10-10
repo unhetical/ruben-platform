@@ -1,12 +1,78 @@
-<div class="p-4 text-center">
-  <h3>Aquí irá la página de login</h3>
-  <button
-    pButton
-    pRipple
-    type="button"
-    label="Ir a inicio"
-    class="p-button-text p-button-rounded mx-2"
-    style="font-weight: 600"
-    (click)="login()"
-  ></button>
+<div class="login d-flex align-items-center justify-content-center">
+  <!-- Login container -->
+  <div
+    class="p-shadow-24 p-4 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-light rounded"
+  >
+    <h2>Welcome to Ruben's platform</h2>
+    <form [formGroup]="form">
+      <!-- Username -->
+      <div class="form-group pb-4">
+        <label for="username" class="pb-1">Username</label>
+        <input
+          type="text"
+          name="username"
+          formControlName="username"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              form.controls.username.touched && form.controls.username.invalid,
+            'is-valid': form.controls.username.valid
+          }"
+          placeholder="test@gmail.com"
+          aria-describedby="username"
+        />
+        <small
+          *ngIf="
+            form.controls.username.touched && form.controls.username.invalid
+          "
+          class="invalid-feedback"
+          >Review the user email</small
+        >
+
+        <small *ngIf="form.controls.username.valid" class="valid-feedback"
+          >Perfect!</small
+        >
+      </div>
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password" class="pb-1">Password</label>
+        <input
+          type="password"
+          name="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              form.controls.password.touched && form.controls.password.invalid,
+            'is-valid': form.controls.password.valid
+          }"
+          placeholder="xxxx"
+          aria-describedby="password"
+        />
+        <small
+          *ngIf="
+            form.controls.password.touched && form.controls.password.invalid
+          "
+          class="invalid-feedback"
+          >Review the password</small
+        >
+
+        <small *ngIf="form.controls.password.valid" class="valid-feedback"
+          >Perfect!</small
+        >
+      </div>
+    </form>
+
+    <div class="text-center mt-3">
+      <button
+        pButton
+        pRipple
+        label="Login"
+        class="p-button-text p-button-rounded mx-2"
+        style="font-weight: 600"
+        type="button"
+        (click)="onSubmit()"
+      ></button>
+    </div>
+  </div>
 </div>

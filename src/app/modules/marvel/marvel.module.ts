@@ -1,8 +1,8 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarvelRoutingModule } from './marvel-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Components
 import { CharacterListPageComponent } from './pages/character-list-page.component';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
@@ -23,6 +23,7 @@ import { ScrollPanelModule } from 'primeng-lts/scrollpanel';
 import { TooltipModule } from 'primeng-lts/tooltip';
 import { FileUploadModule } from 'primeng-lts/fileupload';
 import { InputTextareaModule } from 'primeng-lts/inputtextarea';
+import { ProgressSpinnerModule } from 'primeng-lts/progressspinner';
 
 @NgModule({
   declarations: [CharacterListPageComponent, CharacterDetailComponent],
@@ -42,6 +43,7 @@ import { InputTextareaModule } from 'primeng-lts/inputtextarea';
     TooltipModule,
     FileUploadModule,
     InputTextareaModule,
+    ProgressSpinnerModule
   ],
   providers: [
     DialogService,

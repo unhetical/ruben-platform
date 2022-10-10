@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +8,12 @@ import { ButtonModule } from 'primeng-lts/button';
 
 @NgModule({
   declarations: [LoginPageComponent],
-  imports: [CommonModule, AuthRoutingModule, ButtonModule],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,
+  ],
 })
 export class AuthModule {}
