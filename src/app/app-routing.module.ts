@@ -1,35 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@core/guards/auth.guard';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/main',
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    canActivate: [AuthGuard],
+    path: 'main',
+    ...canActivate(() => redirectUnauthorizedTo(['login'])),
     loadChildren: () =>
-      import('@modules/home/home.module').then((m) => m.HomeModule),
-  },
-  {
-    path: 'countries',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('@modules/countries/countries.module').then(
-        (m) => m.CountriesModule
-      ),
-  },
-  {
-    path: 'marvel',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('@modules/marvel/marvel.module').then((m) => m.MarvelModule),
+      import('@modules/main/main.module').then((m) => m.MainModule),
   },
   {
     path: 'login',
+    ...canActivate(() => redirectLoggedInTo(['main/home'])),
     loadChildren: () =>
       import('@modules/auth/auth.module').then((m) => m.AuthModule),
   },

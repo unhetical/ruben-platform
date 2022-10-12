@@ -1,0 +1,89 @@
+<div class="login d-flex align-items-center justify-content-center">
+  <!-- Login container -->
+  <div
+    class="login__container p-shadow-24 p-4 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-light rounded"
+  >
+    <h2>New account</h2>
+    <form [formGroup]="form">
+      <!-- email -->
+      <div class="form-group pb-4">
+        <label for="email" class="pb-1">Email</label>
+        <input
+          type="text"
+          name="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              form.controls.email.touched && form.controls.email.invalid,
+            'is-valid': form.controls.email.valid
+          }"
+          placeholder="test@gmail.com"
+          aria-describedby="email"
+        />
+        <small
+          *ngIf="form.controls.email.touched && form.controls.email.invalid"
+          class="invalid-feedback"
+          >Review the user email</small
+        >
+
+        <small *ngIf="form.controls.email.valid" class="valid-feedback"
+          >Perfect!</small
+        >
+      </div>
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password" class="pb-1">Password</label>
+        <input
+          type="password"
+          name="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              form.controls.password.touched && form.controls.password.invalid,
+            'is-valid': form.controls.password.valid
+          }"
+          placeholder="xxxx"
+          aria-describedby="password"
+        />
+        <small
+          *ngIf="
+            form.controls.password.touched && form.controls.password.invalid
+          "
+          class="invalid-feedback"
+          >Mínimum of 6 characters</small
+        >
+
+        <small *ngIf="form.controls.password.valid" class="valid-feedback"
+          >Perfect!</small
+        >
+      </div>
+    </form>
+
+    <!-- Buttons -->
+    <div class="text-center mt-3">
+      <!-- Create account -->
+      <button
+        pButton
+        pRipple
+        label="Create account"
+        class="p-button-text p-button-rounded mx-2"
+        style="font-weight: 600"
+        type="button"
+        (click)="onSubmit()"
+      ></button>
+      <!-- Return login -->
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Back to login"
+        class="p-button-secondary p-button-text"
+        [routerLink]="['/login']"
+      ></button>
+    </div>
+  </div>
+</div>
+<!-- MESSAGES -->
+<p-toast></p-toast>

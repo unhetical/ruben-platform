@@ -1,0 +1,200 @@
+<div class="p-4">
+  <p-table
+    *ngIf="vehicles; else vhTemplate"
+    #vehicleTable
+    [value]="vehicles"
+    [columns]="selectedCols"
+    [rows]="8"
+    [(selection)]="vehicleService.selectedVehicle"
+    (onRowSelect)="
+      showVehicleForm(vehicleTable, vehicleService.selectedVehicle)
+    "
+    [showCurrentPageReport]="true"
+    [paginator]="true"
+    [globalFilterFields]="filters"
+    [scrollable]="true"
+    [style]="{ width: '100%' }"
+    styleClass="p-datatable-sm"
+    [dataKey]="'rowId'"
+    [rowExpandMode]="'single'"
+    currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} vehículos"
+  >
+    <ng-template pTemplate="caption">
+      <h4 class="pb-2 fw-bold">Vehicles</h4>
+      <div class="row">
+        <div class="col-lg-4 col-md-8 col-sm-12 pb-2 me-3">
+          <input
+            #searchVehicle
+            class="form-control"
+            type="search"
+            pInputText
+            placeholder="Buscar ..."
+            (input)="vehicleTable.filterGlobal(searchVehicle.value, 'contains')"
+          />
+        </div>
+
+        <div class="col me-3 pb-2">
+          <p-multiSelect
+            [options]="vehicleService.cols"
+            [(ngModel)]="selectedCols"
+            optionLabel="header"
+            selectedItemsLabel="{0} columnas seleccionadas"
+            [style]="{ minWidth: '200px' }"
+            placeholder="Selecciona las columnas"
+          ></p-multiSelect>
+        </div>
+        <div class="col">
+          <p-button
+            label=" Añadir vehículo"
+            (click)="showVehicleForm(vehicleTable)"
+          ></p-button>
+          <button
+            type="button"
+            pButton
+            pRipple
+            class="p-button-success mx-4"
+            icon="pi pi-file-excel"
+            (click)="vehicleTable.exportCSV()"
+            pTooltip="Exportar a Excel"
+            tooltipPosition="bottom"
+          ></button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 50px"></th>
+        <th
+          *ngFor="let col of selectedCols"
+          [pSortableColumn]="col.field"
+          [style.width]="col.width"
+        >
+          {{ col.header }}
+          <p-columnFilter
+            *ngIf="col.field === 'entryDate' || col.field === 'leavingDate'"
+            type="text"
+            [field]="col.field"
+            display="menu"
+            [showMatchModes]="true"
+            [showAddButton]="false"
+            [showOperator]="false"
+          >
+          </p-columnFilter>
+        </th>
+        <th style="width: 180px"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template
+      pTemplate="body"
+      let-rowData
+      let-columns="columns"
+      let-expanded="expanded"
+    >
+      <tr (click)="showVehicleDetails(rowData)">
+        <td style="width: 50px">
+          <button
+            *ngIf="rowData.drivers"
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="rowData"
+            class="p-button-text p-button-rounded p-button-plain"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            (click)="
+              $event.stopImmediatePropagation();
+              $event.preventDefault();
+              onRowExpand(vehicleTable, rowData)
+            "
+          ></button>
+        </td>
+        <td
+          *ngFor="let col of columns"
+          [ngSwitch]="col.type"
+          [style.width]="col.width"
+        >
+          <span *ngSwitchCase="'date'">
+            {{ rowData[col.field] | date: "dd/MM/yyyy" }}
+          </span>
+          <span *ngSwitchCase="'checkbox'">
+            {{ rowData[col.field] ? "Activo" : "Inactivo" }}
+          </span>
+          <span
+            *ngSwitchDefault
+            [ngStyle]="{
+              'font-size': col.field === 'Observaciones' ? '0.9em' : ''
+            }"
+          >
+            {{ rowData[col.field] ? rowData[col.field] : "" }}
+          </span>
+        </td>
+        <td class="text-center">
+          <button
+            *ngIf="rowData.active"
+            pButton
+            pRipple
+            type="button"
+            class="p-button-rounded p-button-success p-button-outlined mx-2"
+            icon="pi pi-plus"
+            pTooltip="Asignar conductor"
+            tooltipPosition="bottom"
+            (click)="
+              showAddDriver(rowData);
+              $event.stopImmediatePropagation();
+              $event.preventDefault()
+            "
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            class="p-button-rounded p-button-outlined mx-2"
+            icon="pi pi-pencil"
+            pTooltip="Editar vehículo"
+            tooltipPosition="bottom"
+            (click)="
+              showVehicleForm(vehicleTable, rowData);
+              $event.stopImmediatePropagation();
+              $event.preventDefault()
+            "
+          ></button>
+          <button
+            *ngIf="rowData.active"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-times"
+            class="p-button-rounded p-button-danger p-button-outlined mx-2"
+            pTooltip="Anular vehículo"
+            tooltipPosition="bottom"
+            (click)="removeVehicle(rowData, $event); $event.stopPropagation()"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion" let-rowData>
+      <tr style="background-color: #f8f9fa">
+        <td colspan="12">
+          <app-drivers-table></app-drivers-table>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length">No se han obtenido resultados</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- LOADER -->
+  <ng-template #vhTemplate>
+    <app-skeleton-table #vhTemplate></app-skeleton-table>
+  </ng-template>
+</div>
+
+<!-- Messages -->
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>

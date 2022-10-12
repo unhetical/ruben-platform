@@ -1,13 +1,13 @@
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from '@modules/auth/services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
 // Initialize Firebase
-const app = initializeApp(environment.firebaseConfig);
+const app = initializeApp(environment.firebase);
 const analytics = getAnalytics(app);
 
 @Component({
@@ -15,10 +15,13 @@ const analytics = getAnalytics(app);
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  isLogin$ = new Observable<boolean>();
+export class AppComponent implements OnInit {
+  isLogged$ = new Observable<boolean>();
 
-  constructor(private auth: AuthService) {
-    this.isLogin$ = this.auth.getToken();
+  constructor(public auth: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.isLogged$ = this.auth.logged$;
   }
 }

@@ -1,0 +1,20 @@
+/* ===== PRIME ===== */
+:host ::ng-deep.p-datatable-scrollable-body {
+  background-color: #f8f9fa;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody {
+  & > tr {
+    & > td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+        cursor: pointer;
+        overflow: auto;
+        text-overflow: initial;
+      }
+    }
+  }
+}

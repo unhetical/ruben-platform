@@ -1,0 +1,175 @@
+<!-- Messages -->
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
+<!-- Loading -->
+<ng-template #loadingTemplate style="width: 100%">
+  <div style="width: 100%">
+    <app-skeleton-table></app-skeleton-table>
+  </div>
+</ng-template>
+
+<!-- Container -->
+<div class="d-flex justify-content-center p-lg-4">
+  <!-- Table -->
+  <p-table
+    *ngIf="!(loading$ | async); else loadingTemplate"
+    #characterTable
+    [value]="characters"
+    [columns]="cols"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [paginator]="true"
+    [scrollable]="true"
+    scrollHeight="530px"
+    scrollDirection="vertical"
+    [virtualScroll]="true"
+    [virtualRowHeight]="116"
+    [style]="{ width: '99%' }"
+    styleClass="p-datatable-sm"
+    [rowsPerPageOptions]="[10, 20, 40]"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} characters"
+    dataKey="id"
+    [globalFilterFields]="['id', 'name', 'description']"
+  >
+    <!-- Caption -->
+    <ng-template pTemplate="caption">
+      <h4 class="pb-2 fw-bold">Marvel Characters</h4>
+      <div class="row">
+        <!-- Search -->
+        <div class="col-lg-4 col-md-8 col-sm-12">
+          <input
+            #search
+            class="form-control"
+            type="search"
+            pInputText
+            placeholder="Buscar ..."
+            (input)="handleFilter($event, characterTable)"
+          />
+        </div>
+        <!-- Buttons -->
+        <div class="col">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Add character"
+            class="p-button-text p-button-rounded mx-2"
+            style="font-weight: 600"
+            (click)="openDetailModal('add')"
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-file-excel"
+            class="p-button-rounded p-button-text p-button-success mx-4 font-xl"
+            pTooltip="Export to Excel"
+            tooltipPosition="bottom"
+            (click)="characterTable.exportCSV()"
+          ></button>
+        </div>
+      </div>
+    </ng-template>
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th
+          *ngFor="let col of cols"
+          [pSortableColumn]="col.field"
+          class="text-center"
+          [style.max-width]="col.width"
+        >
+          {{ col.header }}
+        </th>
+        <th style="width: 180px"></th>
+      </tr>
+    </ng-template>
+    <!-- Body -->
+    <ng-template pTemplate="body" let-character>
+      <tr [pSelectableRow]="character">
+        <td
+          *ngFor="let col of cols"
+          class="text-center"
+          [style.max-width]="col.width"
+        >
+          <span
+            *ngIf="col.field !== 'avatar'"
+            else
+            elseTemplate
+            class="text-truncate"
+          >
+            {{ character[col.field] }}
+          </span>
+
+          <div
+            *ngIf="col.field === 'avatar'"
+            class="py-2"
+            style="min-width: 140px"
+          >
+            <img
+              class="img-fluid img-thumbnail"
+              src="{{ character.thumbnail.path }}.{{
+                character.thumbnail.extension
+              }}"
+              [alt]="character.name"
+              width="100"
+              height="56"
+              loading="lazy"
+            />
+          </div>
+        </td>
+        <!-- Action buttons column -->
+        <td class="d-flex justify-content-end" style="width: 180px">
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-eye"
+            class="p-button-rounded p-button-text mx-2"
+            pTooltip="View Character"
+            tooltipPosition="bottom"
+            (click)="
+              openDetailModal('view', character);
+              $event.stopImmediatePropagation();
+              $event.preventDefault()
+            "
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-text mx-2"
+            pTooltip="Edit Character"
+            tooltipPosition="bottom"
+            (click)="
+              openDetailModal('edit', character);
+              $event.stopImmediatePropagation();
+              $event.preventDefault()
+            "
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-text mx-2 text-danger"
+            pTooltip="Remove Character"
+            tooltipPosition="bottom"
+            (click)="
+              removeCharacter($event, character);
+              $event.stopImmediatePropagation();
+              $event.preventDefault()
+            "
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <!-- Empty message -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="'5'">No se han obtenido resultados</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

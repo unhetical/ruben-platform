@@ -1,4 +1,4 @@
-import { CountryService } from '@modules/countries/services/country.service';
+import { CountryService } from '@modules/main/modules/countries/services/country.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';

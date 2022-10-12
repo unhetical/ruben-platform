@@ -4,7 +4,7 @@
     class="p-toolbar-group-left d-flex align-items-center justify-content-center"
   >
     <h1
-      [routerLink]="['/home']"
+      [routerLink]="['home']"
       class="p-toolbar-title mb-0 d-none d-sm-block"
       style="cursor: pointer"
       pTooltip="Go home"
@@ -24,7 +24,7 @@
       class="p-button-rounded p-button-text p-shadow-2 bg-white mx-2"
       pTooltip="Countries"
       tooltipPosition="bottom"
-      [routerLink]="['/countries']"
+      [routerLink]="['countries']"
     ></button>
     <button
       pButton
@@ -34,7 +34,17 @@
       class="p-button-rounded p-button-text p-shadow-2 bg-white mx-2"
       pTooltip="Marvel characters"
       tooltipPosition="bottom"
-      [routerLink]="['/marvel/characters']"
+      [routerLink]="['marvel/characters']"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-car"
+      class="p-button-rounded p-button-text p-shadow-2 bg-white mx-2"
+      pTooltip="Fleet"
+      tooltipPosition="bottom"
+      [routerLink]="['fleet/vehicles']"
     ></button>
   </div>
 

@@ -1,4 +1,4 @@
-import { CharacterService } from '@modules/marvel/services/character.service';
+import { CharacterService } from '@modules/main/modules/marvel/services/character.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';

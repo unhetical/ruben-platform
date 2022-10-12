@@ -12,6 +12,10 @@ import { CountriesEffects } from './state/effects/countries.effects';
 import { CharactersEffects } from './state/effects/characters.effects';
 import { SharedModule } from '@shared/shared.module';
 import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,10 +24,12 @@ import { AuthInterceptor } from '@core/interceptors/auth.interceptor';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ name: 'TEST' }),
     EffectsModule.forRoot([CountriesEffects, CharactersEffects]),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

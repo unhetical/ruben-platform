@@ -1,5 +1,7 @@
+import { MessageService } from 'primeng-lts/api';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { Component, HostBinding, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -42,6 +44,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
+    this.auth
+      .logout()
+      .then(() => this.auth.removeUser())
+      .catch((err) => console.log(err));
   }
 }

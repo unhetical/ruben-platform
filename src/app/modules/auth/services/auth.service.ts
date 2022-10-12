@@ -1,48 +1,62 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  GoogleAuthProvider,
+  User,
+  UserCredential,
+} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  token$ = new Subject<boolean>();
-  token!: boolean;
+  logged$ = new Subject<boolean>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: Auth) {}
 
-  isLogin(): boolean {
-    // TODO: Login page & methods to validate jwt token
-    this.token = localStorage.getItem('auth_token') ? true : false;
-    this.token$.next(this.token);
-    return this.token;
+  register({ email, password }: any) {
+    return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-  login(): void {
-    if (!this.isLogin()) {
-      this.setToken();
-    }
-    this.router.navigateByUrl('/home');
+  login({ email, password }: any): Promise<UserCredential> {
+    return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  logout(): void {
-    this.removeToken();
+  loginWithGoogle(): Promise<UserCredential> {
+    return signInWithPopup(this.auth, new GoogleAuthProvider());
+  }
+
+  logout(): Promise<void> {
     this.router.navigateByUrl('/login');
+    return signOut(this.auth);
   }
 
-  getToken(): Observable<any> {
-    return this.token$.asObservable();
+  setUser(user: User): void {
+    const item = localStorage.getItem('user');
+    if (item) {
+      localStorage.removeItem('user');
+    }
+
+    localStorage.setItem('user', JSON.stringify(user));
+    this.logged$.next(true);
   }
 
-  setToken(token = true): void {
-    localStorage.setItem('auth_token', 'XXX');
-    this.token = token;
-    this.token$.next(token);
+  removeUser(): void {
+    localStorage.removeItem('user');
+    this.logged$.next(false);
   }
 
-  removeToken(): void {
-    localStorage.removeItem('auth_token');
-    this.token = false;
-    this.token$.next(this.token);
+  getUser(): User {
+    let user = null;
+    if (localStorage.getItem('user')) {
+      user = JSON.parse(localStorage.getItem('user') || '');
+    }
+    return user;
   }
 }

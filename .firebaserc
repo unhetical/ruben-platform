@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "ruben-platform"
+  },
+  "targets": {
+    "ruben-platform": {
+      "hosting": {
+        "ruben-platform": [
+          "ruben-platform"
+        ]
+      }
+    }
   }
 }
