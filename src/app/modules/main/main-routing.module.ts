@@ -40,6 +40,14 @@ const routes: Routes = [
             (m) => m.FleetModule
           ),
       },
+      {
+        path: 'firebase',
+        ...canActivate(() => redirectUnauthorizedTo(['login'])),
+        loadChildren: () =>
+          import('@modules/main/modules/firebase-crud/firebase-crud.module').then(
+            (m) => m.FirebaseCRUDModule
+          ),
+      },
     ],
   },
 ];
